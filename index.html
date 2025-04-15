@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Malvin Noël | Data Scientist & AI Engineer</title>
+
+  <!-- SEO Meta Tag -->
+  <meta name="description" content="Portfolio of Malvin Noël, Data Scientist & AI Engineer specializing in LLMs, Generative AI, and RAG solutions.">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <!-- GSAP Animation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+
+  <!-- Custom Fonts & CSS Variables -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap');
+    
+    :root {
+      --primary: #00f0ff;
+      --secondary: #7b2dff;
+      --dark: #0a0a1a;
+      --light: #f0f0ff;
+    }
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    
+    h1, h2, h3, .tech-font {
+      font-family: 'Orbitron', sans-serif;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+    }
+    
+    .card-glass {
+      background: rgba(15, 15, 35, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+      transition: all 0.3s ease;
+    }
+    
+    .card-glass:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px 0 rgba(0, 240, 255, 0.2);
+    }
+    
+    .neon-border {
+      position: relative;
+    }
+    
+    .neon-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(0, 240, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 240, 255, 0);
+      }
+    }
+    
+    .floating {
+      animation: floating 6s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .grid-pattern {
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    
+    .typewriter {
+      overflow: hidden;
+      border-right: 2px solid var(--primary);
+      white-space: nowrap;
+      letter-spacing: 2px;
+      animation:
+        typing 3.5s steps(40, end),
+        blink-caret .75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50%      { border-color: var(--primary); }
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+      }
+      40% {
+        transform: translateY(-20px) translateX(-50%);
+      }
+      60% {
+        transform: translateY(-10px) translateX(-50%);
+      }
+    }
+    
+    .binary-rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+      opacity: 0.1;
+    }
+    
+    .binary-digit {
+      position: absolute;
+      color: var(--primary);
+      font-size: 14px;
+      font-family: 'Orbitron', sans-serif;
+      opacity: 0.7;
+      animation: fall linear infinite;
+    }
+    
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+    
+    .glow {
+      filter: drop-shadow(0 0 8px var(--primary));
+    }
+    
+    .hover-glow:hover {
+      filter: drop-shadow(0 0 12px var(--primary));
+    }
+    
+    .circuit-pattern {
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(123, 45, 255, 0.3) 1px, transparent 0);
+      background-size: 30px 30px;
+    }
+    
+    .animated-gradient {
+      background: linear-gradient(-45deg, #00f0ff, #7b2dff, #00f0ff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+    
+    @keyframes gradientBG {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .skill-bar {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .skill-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    
+    .skill-bar:hover::after {
+      transform: translateX(100%);
+    }
+    
+    .floating-dots {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      opacity: 0.5;
+      animation: float 15s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+      50% {
+        transform: translateY(-100px) translateX(100px);
+      }
+      100% {
+        transform: translateY(0) translateX(0);
+      }
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--primary), transparent);
+      opacity: 0;
+      animation: particle-fade 4s infinite;
+    }
+    
+    @keyframes particle-fade {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="grid-pattern circuit-pattern">
+  <!-- Binary Rain Background -->
+  <div id="binary-rain" class="binary-rain"></div>
+
+  <!-- Floating Dots -->
+  <div class="floating-dots" id="floating-dots"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-opacity-90 backdrop-blur-md">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex justify-between items-center">
+        <!-- LOGO / BRAND -->
+        <a href="#home" class="text-2xl font-bold gradient-text hover-glow transition-all" aria-label="Home">
+          Malvin Noël
+        </a>
+        <!-- MAIN MENU (hidden on mobile) -->
+        <div class="hidden md:flex space-x-8" id="navbarMenu">
+          <a href="#home" class="hover:text-primary transition-colors hover-glow">Home</a>
+          <a href="#about" class="hover:text-primary transition-colors hover-glow">About</a>
+          <a href="#skills" class="hover:text-primary transition-colors hover-glow">Skills</a>
+          <a href="#projects" class="hover:text-primary transition-colors hover-glow">Projects</a>
+          <a href="#contact" class="hover:text-primary transition-colors hover-glow">Contact</a>
+        </div>
+        <!-- MOBILE MENU BUTTON -->
+        <button class="md:hidden text-xl hover:text-primary transition-colors" id="mobileMenuBtn" aria-label="Toggle Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="min-h-screen flex items-center relative overflow-hidden">
+    <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between pt-20">
+      <!-- HERO TEXT -->
+      <div class="md:w-1/2 mb-16 md:mb-0">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">
+          <span class="gradient-text">Hello, I'm</span>
+          <span class="block typewriter">Malvin</span>
+        </h1>
+        <!-- Updated to 'Data Scientist & AI Engineer' -->
+        <h2 class="text-2xl md:text-3xl mb-6 tech-font glow">
+          Data Scientist & AI Engineer
+        </h2>
+        <p class="text-lg mb-8 max-w-lg opacity-90">
+          Building cutting-edge LLM and RAG solutions that empower engineering teams to automate and optimize complex workflows. Let's bring AI innovation to life together!
+        </p>
+        <div class="flex space-x-4">
+          <a href="#projects" class="px-8 py-3 gradient-bg rounded-full font-bold text-dark hover:shadow-lg hover:shadow-primary/30 transition-all hover:scale-105" aria-label="View Work">
+            View Work
+          </a>
+          <a href="#contact" class="px-8 py-3 border border-primary rounded-full font-bold hover:bg-primary hover:bg-opacity-10 transition-all hover:scale-105" aria-label="Contact Me">
+            Contact Me
+          </a>
+        </div>
+      </div>
+      <!-- HERO IMAGE -->
+      <div class="md:w-1/2 flex justify-center relative">
+        <div class="relative">
+          <div
+            class="w-64 h-64 md:w-80 md:h-80 rounded-full gradient-bg absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 blur-3xl pulse"
+          ></div>
+          <img
+            src="assets/images/profile.png"
+            alt="Photo of Malvin Noël, Data Scientist & AI Engineer"
+            class="w-64 h-64 md:w-80 md:h-80 rounded-full object-cover border-4 border-primary border-opacity-30 neon-border floating hover-glow"
+          />
+          <div
+            class="absolute -bottom-5 -right-5 bg-dark p-4 rounded-full border border-primary border-opacity-30 neon-border hover-glow"
+          >
+            <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center pulse">
+              <i class="fas fa-robot text-2xl text-dark"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <i class="fas fa-chevron-down text-2xl animate-bounce glow"></i>
+    </div>
+  </section>
+
+
+  <!-- About Section -->
+  <section id="about" class="py-20 relative">
+    <div class="absolute -top-20 left-0 w-full h-20" id="about-trigger"></div>
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center tech-font">
+        <span class="gradient-text">About</span> Me
+      </h2>
+      <div class="flex flex-col md:flex-row items-center gap-12">
+        <!-- Philosophy -->
+        <div class="md:w-1/3">
+          <div class="card-glass p-8 rounded-2xl h-full hover-glow">
+            <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mb-6 glow">
+              <i class="fas fa-brain text-3xl text-dark"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 tech-font">My Philosophy</h3>
+            <p class="opacity-90">
+              I believe AI should augment human potential. My work focuses on creating robust, production-ready AI workflows—especially in Generative AI and Retrieval-Augmented Generation—to help teams solve real-world challenges faster.
+            </p>
+            <p class="opacity-90">
+                Currently exploring content automation using GenAI pipelines for video creation (e.g., auto-generating TikTok/YouTube Shorts with AI voice, script, and video search from structured inputs).
+            </p>
+          </div>
+        </div>
+        
+        <!-- Education -->
+        <div class="md:w-1/3">
+          <div class="card-glass p-8 rounded-2xl h-full hover-glow">
+            <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mb-6 glow">
+              <i class="fas fa-graduation-cap text-3xl text-dark"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 tech-font">Education</h3>
+            <p class="opacity-90 mb-4">
+              <span class="font-bold">Politecnico di Milano</span><br>
+              Exchange Semester in AI (2024 - 2025)
+              <p class="opacity-90 mb-2">
+                🏆 Finished <span class="font-bold text-primary">8<sup>th</sup></span> in the <a href="https://www.kaggle.com/competitions/recommender-system-2024-challenge-polimi/leaderboard" target="_blank" class="text-primary hover-glow underline">Polimi Recommender System Challenge</a> (2024)
+             </p>
+            </p>
+            <p class="opacity-90">
+              <span class="font-bold">ESILV (Léonard de Vinci Engineering School)</span><br>
+              MSc Data Science & AI (2022 - 2025)
+            </p>
+          </div>
+        </div>
+        
+        <!-- Experience -->
+        <div class="md:w-1/3">
+          <div class="card-glass p-8 rounded-2xl h-full hover-glow">
+            <div class="w-20 h-20 gradient-bg rounded-full flex items-center justify-center mb-6 glow">
+              <i class="fas fa-briefcase text-3xl text-dark"></i>
+            </div>
+            <h3 class="text-xl font-bold mb-3 tech-font">Experience</h3>
+            <p class="opacity-90 mb-4">
+              <span class="font-bold">Safran - AI Intern / Generative AI & RAG</span><br>
+              Feb 2024 - July 2024<br>
+              Developed a RAG system for engine impact analyses, used hybrid retrieval (FAISS + BM25) & LLMs (Mistral, LLaMA).
+            </p>
+            <p class="opacity-90">
+              <span class="font-bold">Thales - R&D Intern in Applied Math & AI</span><br>
+              Apr 2024 - Aug 2024<br>
+              Evaluated AI models for fatigue detection in crew monitoring, improved detection speed & reliability.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-20 bg-opacity-50 bg-dark relative">
+    <div class="absolute -top-20 left-0 w-full h-20" id="skills-trigger"></div>
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center tech-font">
+        My <span class="gradient-text">Skills</span>
+      </h2>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Skill 1: RAG & NLP -->
+        <div class="card-glass p-6 rounded-xl text-center hover:translate-y-2 transition-transform hover-glow">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 glow">
+            <i class="fas fa-language text-2xl text-dark" aria-hidden="true"></i>
+          </div>
+          <h3 class="font-bold mb-2 tech-font">Generative AI & NLP</h3>
+          <div class="w-full bg-dark bg-opacity-50 rounded-full h-2 mb-2 skill-bar">
+            <div class="gradient-bg h-2 rounded-full" style="width: 95%;"></div>
+          </div>
+        </div>
+        
+        <!-- Skill 2: Python (Advanced) -->
+        <div class="card-glass p-6 rounded-xl text-center hover:translate-y-2 transition-transform hover-glow">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 glow">
+            <i class="fab fa-python text-2xl text-dark" aria-hidden="true"></i>
+          </div>
+          <h3 class="font-bold mb-2 tech-font">Python (Advanced)</h3>
+          <div class="w-full bg-dark bg-opacity-50 rounded-full h-2 mb-2 skill-bar">
+            <div class="gradient-bg h-2 rounded-full" style="width: 98%;"></div>
+          </div>
+        </div>
+        
+        <!-- Skill 3: Hybrid Retrieval & LangChain -->
+        <div class="card-glass p-6 rounded-xl text-center hover:translate-y-2 transition-transform hover-glow">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 glow">
+            <i class="fas fa-network-wired text-2xl text-dark" aria-hidden="true"></i>
+          </div>
+          <h3 class="font-bold mb-2 tech-font">RAG & LangChain</h3>
+          <div class="w-full bg-dark bg-opacity-50 rounded-full h-2 mb-2 skill-bar">
+            <div class="gradient-bg h-2 rounded-full" style="width: 90%;"></div>
+          </div>
+        </div>
+        
+        <!-- Skill 4: Docker & MLOps -->
+        <div class="card-glass p-6 rounded-xl text-center hover:translate-y-2 transition-transform hover-glow">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 glow">
+            <i class="fab fa-docker text-2xl text-dark" aria-hidden="true"></i>
+          </div>
+          <h3 class="font-bold mb-2 tech-font">Docker & MLOps</h3>
+          <div class="w-full bg-dark bg-opacity-50 rounded-full h-2 mb-2 skill-bar">
+            <div class="gradient-bg h-2 rounded-full" style="width: 85%;"></div>
+          </div>
+        </div>
+        
+        <!-- Skill 5: TensorFlow & PyTorch -->
+        <div class="card-glass p-6 rounded-xl text-center hover:translate-y-2 transition-transform hover-glow">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 glow">
+            <i class="fas fa-project-diagram text-2xl text-dark" aria-hidden="true"></i>
+          </div>
+          <h3 class="font-bold mb-2 tech-font">TensorFlow / PyTorch</h3>
+          <div class="w-full bg-dark bg-opacity-50 rounded-full h-2 mb-2 skill-bar">
+            <div class="gradient-bg h-2 rounded-full" style="width: 92%;"></div>
+          </div>
+        </div>
+
+        <!-- Skill 6: SQL & Databases -->
+        <div class="card-glass p-6 rounded-xl text-center hover:translate-y-2 transition-transform hover-glow">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 glow">
+            <i class="fas fa-database text-2xl text-dark" aria-hidden="true"></i>
+          </div>
+          <h3 class="font-bold mb-2 tech-font">SQL & Databases</h3>
+          <div class="w-full bg-dark bg-opacity-50 rounded-full h-2 mb-2 skill-bar">
+            <div class="gradient-bg h-2 rounded-full" style="width: 80%;"></div>
+          </div>
+        </div>
+
+        <!-- Skill 7: Git & Bash -->
+        <div class="card-glass p-6 rounded-xl text-center hover:translate-y-2 transition-transform hover-glow">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 glow">
+            <i class="fas fa-code-branch text-2xl text-dark" aria-hidden="true"></i>
+          </div>
+          <h3 class="font-bold mb-2 tech-font">Git & Bash</h3>
+          <div class="w-full bg-dark bg-opacity-50 rounded-full h-2 mb-2 skill-bar">
+            <div class="gradient-bg h-2 rounded-full" style="width: 85%;"></div>
+          </div>
+        </div>
+
+        <!-- Skill 8: C++ & Others -->
+        <div class="card-glass p-6 rounded-xl text-center hover:translate-y-2 transition-transform hover-glow">
+          <div class="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4 glow">
+            <!-- 'C' icon as a placeholder for C++ -->
+            <i class="fab fa-cuttlefish text-2xl text-dark" aria-hidden="true"></i>
+          </div>
+          <h3 class="font-bold mb-2 tech-font">C++ / MATLAB / C#</h3>
+          <div class="w-full bg-dark bg-opacity-50 rounded-full h-2 mb-2 skill-bar">
+            <div class="gradient-bg h-2 rounded-full" style="width: 75%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 relative">
+    <div class="absolute -top-20 left-0 w-full h-20" id="projects-trigger"></div>
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center tech-font">
+        Featured <span class="gradient-text">Projects</span>
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1: RAG for Engine Incidents -->
+        <div class="card-glass rounded-xl overflow-hidden hover-glow">
+          <div class="h-48 animated-gradient flex items-center justify-center relative">
+            <i class="fas fa-plane-departure text-6xl text-dark opacity-80 glow" aria-hidden="true"></i>
+            <div class="particle" style="top: 30%; left: 40%; width: 100px; height: 100px; animation-delay: 0s;"></div>
+            <div class="particle" style="top: 60%; left: 70%; width: 80px; height: 80px; animation-delay: 1s;"></div>
+            <div class="particle" style="top: 20%; left: 20%; width: 60px; height: 60px; animation-delay: 2s;"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 tech-font">RAG-based Engine Diagnostics</h3>
+            <p class="text-sm opacity-90 mb-4">
+              A Retrieval-Augmented Generation system for analyzing CFM56 & LEAP engine incidents. Integrates FAISS + BM25 to retrieve past case data for faster troubleshooting.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Hybrid Retrieval</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">LangChain</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Python</span>
+            </div>
+            <a href="#" class="text-primary text-sm font-bold flex items-center hover-glow">
+              View Case Study <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Project 2: Fatigue Detection -->
+        <div class="card-glass rounded-xl overflow-hidden hover-glow">
+          <div class="h-48 animated-gradient flex items-center justify-center relative">
+            <i class="fas fa-heartbeat text-6xl text-dark opacity-80 glow" aria-hidden="true"></i>
+            <div class="particle" style="top: 40%; left: 30%; width: 120px; height: 120px; animation-delay: 0.5s;"></div>
+            <div class="particle" style="top: 70%; left: 60%; width: 90px; height: 90px; animation-delay: 1.5s;"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 tech-font">Fatigue Detection AI</h3>
+            <p class="text-sm opacity-90 mb-4">
+              R&D project for Thales to detect crew fatigue via face and motion analysis. Implemented model hyperparameter tuning and Docker-based workflows.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Computer Vision</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Statistics</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Docker</span>
+            </div>
+            <a href="#" class="text-primary text-sm font-bold flex items-center hover-glow">
+              View Case Study <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Project 3: Any Additional Project or Demo -->
+        <div class="card-glass rounded-xl overflow-hidden hover-glow">
+          <div class="h-48 animated-gradient flex items-center justify-center relative">
+            <i class="fas fa-flask text-6xl text-dark opacity-80 glow" aria-hidden="true"></i>
+            <div class="particle" style="top: 30%; left: 70%; width: 110px; height: 110px; animation-delay: 0.2s;"></div>
+            <div class="particle" style="top: 60%; left: 20%; width: 70px; height: 70px; animation-delay: 1.2s;"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 tech-font">GenAI Experimental PoC</h3>
+            <p class="text-sm opacity-90 mb-4">
+              Exploring embeddings-based search and few-shot prompt engineering with LLMs like Mistral and LLaMA to create domain-specific chatbots.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Mistral</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">LLaMA</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Prompt Engineering</span>
+            </div>
+            <a href="#" class="text-primary text-sm font-bold flex items-center hover-glow">
+              View Case Study <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 4: Automated Short Video Generation -->
+        <div class="card-glass rounded-xl overflow-hidden hover-glow">
+          <div class="h-48 animated-gradient flex items-center justify-center relative">
+            <i class="fas fa-video text-6xl text-dark opacity-80 glow"></i>
+            <div class="particle" style="top: 40%; left: 30%; width: 100px; height: 100px; animation-delay: 0.3s;"></div>
+            <div class="particle" style="top: 70%; left: 60%; width: 80px; height: 80px; animation-delay: 1.3s;"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 tech-font">Automated TikTok/Shorts Generator</h3>
+            <p class="text-sm opacity-90 mb-4">
+              GenAI-powered app that automates creation of TikTok & YouTube Shorts from structured prompts (CSV). The pipeline generates voice-over, script, and fetches relevant footage online to assemble full videos autonomously.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">GenAI</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Text-to-Speech</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Video Automation</span>
+            </div>
+            <a href="#" class="text-primary text-sm font-bold flex items-center hover-glow">
+              View Demo <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="#" class="px-8 py-3 border border-primary rounded-full font-bold hover:bg-primary hover:bg-opacity-10 transition-all inline-flex items-center hover-glow hover:scale-105">
+          View All Projects <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 relative">
+    <div class="absolute -top-20 left-0 w-full h-20" id="contact-trigger"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-secondary/10 opacity-30 -z-10"></div>
+    <div class="container mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center tech-font">
+        Get In <span class="gradient-text">Touch</span>
+      </h2>
+      
+      <div class="flex flex-col lg:flex-row gap-12">
+        <!-- Contact Info ONLY (No Form) -->
+        <div class="lg:w-1/2 mx-auto">
+          <div class="card-glass p-8 rounded-2xl h-full hover-glow">
+            <h3 class="text-2xl font-bold mb-6 tech-font">Let's Collaborate</h3>
+            <p class="mb-8 opacity-90">
+              Interested in working together or have questions about my work? 
+              Feel free to reach out. I'm always open to discussing new projects or ideas.
+            </p>
+            
+            <div class="flex items-start space-x-4 mb-6">
+              <div class="w-10 h-10 gradient-bg rounded-full flex-shrink-0 flex items-center justify-center glow">
+                <i class="fas fa-map-marker-alt text-dark" aria-hidden="true"></i>
+              </div>
+              <div>
+                <h4 class="font-bold">Location</h4>
+                <p class="opacity-90">Paris, France</p>
+              </div>
+            </div>
+            
+            <!-- Social Icons -->
+            <div class="mt-10 flex space-x-4">
+              <a href="https://www.linkedin.com/in/malvin-noel/" class="w-10 h-10 border border-primary rounded-full flex items-center justify-center hover:bg-primary hover:bg-opacity-10 transition-colors hover-glow" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+              </a>
+              <a href="https://github.com/AIMalvin" class="w-10 h-10 border border-primary rounded-full flex items-center justify-center hover:bg-primary hover:bg-opacity-10 transition-colors hover-glow" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fab fa-github" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-primary border-opacity-20">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <a href="#home" class="text-2xl font-bold gradient-text hover-glow" aria-label="Home">
+            Malvin Noël
+          </a>
+          <p class="mt-2 text-sm opacity-80">
+            &copy; 2025 Malvin Noël. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button
+    id="backToTop"
+    class="fixed bottom-8 right-8 w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-dark shadow-lg transition-all opacity-0 invisible hover:scale-110 hover-glow"
+    aria-label="Back to top"
+  >
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Main JS (inline for simplicity) -->
+  <script>
+    // Binary Rain Effect
+    function createBinaryRain() {
+      const container = document.getElementById('binary-rain');
+      const digits = '01';
+      const count = 100;
+      
+      for (let i = 0; i < count; i++) {
+        const digit = document.createElement('div');
+        digit.className = 'binary-digit';
+        digit.textContent = digits.charAt(Math.floor(Math.random() * digits.length));
+        digit.style.left = Math.random() * 100 + 'vw';
+        digit.style.top = -20 + 'px';
+        digit.style.animationDuration = 5 + Math.random() * 15 + 's';
+        digit.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(digit);
+      }
+    }
+    
+    // Floating Dots Effect
+    function createFloatingDots() {
+      const container = document.getElementById('floating-dots');
+      const dotCount = 15;
+      
+      for (let i = 0; i < dotCount; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.style.left = Math.random() * 100 + 'vw';
+        dot.style.top = Math.random() * 100 + 'vh';
+        dot.style.width = (3 + Math.random() * 7) + 'px';
+        dot.style.height = dot.style.width;
+        dot.style.animationDuration = 10 + Math.random() * 20 + 's';
+        dot.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(dot);
+      }
+    }
+
+    // Toggle Mobile Menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navbarMenu = document.getElementById('navbarMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      // Show / hide the menu
+      navbarMenu.classList.toggle('hidden');
+    });
+
+    // Back to Top Button
+    const backToTopButton = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        // If it's a section link:
+        if (this.getAttribute('href') !== '#') {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      createBinaryRain();
+      createFloatingDots();
+      
+      // GSAP Setup
+      gsap.registerPlugin(ScrollTrigger);
+      
+      // Parallax on #binary-rain (slight upward shift on scroll)
+      gsap.to('#binary-rain', {
+        scrollTrigger: {
+          scrub: true  // smooth scroll synergy
+        },
+        y: -200, // shift upwards
+        ease: "none"
+      });
+
+      // Animate sections on scroll
+      gsap.utils.toArray('section').forEach(section => {
+        gsap.from(section, {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power2.out"
+        });
+      });
+      
+      // Animate cards with a 3D rotation
+      gsap.utils.toArray('.card-glass').forEach((card, i) => {
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            toggleActions: "play none none none"
+          },
+          opacity: 0,
+          rotateX: 70,       // tilt from top
+          y: 30,
+          duration: 0.8,
+          delay: i * 0.1,    // small stagger
+          ease: "back.out(1.4)"
+        });
+      });
+      
+      // Animate skill section heading with a subtle rotation
+      gsap.from('#skills h2', {
+        scrollTrigger: {
+          trigger: '#skills',
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        rotate: 10,
+        scale: 0.8,
+        opacity: 0,
+        duration: 1,
+        ease: "back.out(1.7)"
+      });
+
+      // Animate skill bars
+      gsap.utils.toArray('.skill-bar div').forEach(bar => {
+        gsap.from(bar, {
+          scrollTrigger: {
+            trigger: bar,
+            start: "top 80%",
+            toggleActions: "play none none none"
+          },
+          width: 0,
+          duration: 1.5,
+          ease: "power2.out"
+        });
+      });
+      
+      // Hero section animations
+      gsap.from('#home h1', {
+        opacity: 0,
+        y: -30,
+        duration: 1,
+        delay: 0.2,
+        ease: "power2.out"
+      });
+      gsap.from('#home h2', {
+        opacity: 0,
+        y: -30,
+        duration: 1,
+        delay: 0.4,
+        ease: "power2.out"
+      });
+      gsap.from('#home p', {
+        opacity: 0,
+        y: -30,
+        duration: 1,
+        delay: 0.6,
+        ease: "power2.out"
+      });
+      gsap.from('#home .flex.space-x-4 a', {
+        opacity: 0,
+        y: 30,
+        duration: 1,
+        delay: 0.8,
+        stagger: 0.2,
+        ease: "power2.out"
+      });
+      gsap.from('#home img', {
+        opacity: 0,
+        scale: 0.8,
+        duration: 1,
+        delay: 0.5,
+        ease: "back.out(1.7)"
+      });
+      
+      // Floating animation for profile image
+      gsap.to('#home img', {
+        y: 20,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+      
+      // Pulse animation for AI icon
+      gsap.to('.pulse', {
+        scale: 1.1,
+        duration: 1,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    });
+  </script>
+</body>
+</html>
