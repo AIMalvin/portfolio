@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Malvin Noël | Data Scientist & AI Engineer</title>
@@ -286,6 +287,20 @@
       }
     }
   </style>
+<script>
+  const langButtons = document.querySelectorAll('.lang-btn');
+  const translatables = document.querySelectorAll('.lang');
+
+  langButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
+      translatables.forEach(el => {
+        const text = el.getAttribute(`data-${lang}`);
+        if (text) el.innerText = text;
+      });
+    });
+  });
+</script>
 </head>
 <body class="grid-pattern circuit-pattern">
   <!-- Binary Rain Background -->
@@ -304,14 +319,17 @@
         </a>
         <!-- MAIN MENU (hidden on mobile) -->
         <div class="hidden md:flex space-x-8" id="navbarMenu">
-          <a href="#home" class="hover:text-primary transition-colors hover-glow">Home</a>
-          <a href="#about" class="hover:text-primary transition-colors hover-glow">About</a>
-          <a href="#skills" class="hover:text-primary transition-colors hover-glow">Skills</a>
-          <a href="#projects" class="hover:text-primary transition-colors hover-glow">Projects</a>
-          <a href="#contact" class="hover:text-primary transition-colors hover-glow">Contact</a>
+          <a href="#home" class="hover:text-primary transition-colors hover-glow lang" data-en="Home" data-fr="Accueil">Home</a>
+          <a href="#about" class="hover:text-primary transition-colors hover-glow lang" data-en="About" data-fr="À propos">About</a>
+          <a href="#skills" class="hover:text-primary transition-colors hover-glow lang" data-en="Skills" data-fr="Compétences">Skills</a>
+          <a href="#projects" class="hover:text-primary transition-colors hover-glow lang" data-en="Projects" data-fr="Projets">Projects</a>
+          <a href="#contact" class="hover:text-primary transition-colors hover-glow lang" data-en="Contact" data-fr="Contact">Contact</a>
+          <button class="lang-btn" data-lang="fr" aria-label="Français"><img src="https://flagcdn.com/24x18/fr.png" /></button>
+          <button class="lang-btn" data-lang="en" aria-label="English"><img src="https://flagcdn.com/24x18/gb.png" /></button>
         </div>
         <!-- MOBILE MENU BUTTON -->
         <button class="md:hidden text-xl hover:text-primary transition-colors" id="mobileMenuBtn" aria-label="Toggle Menu">
+        
           <i class="fas fa-bars"></i>
         </button>
       </div>
@@ -635,7 +653,7 @@
               <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Text-to-Speech</span>
               <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Video Automation</span>
             </div>
-            <a href="#" class="text-primary text-sm font-bold flex items-center hover-glow">
+            <a href="https://huggingface.co/spaces/malvin-ai/light-ai-video-generator" target="_blank" class="text-primary text-sm font-bold flex items-center hover-glow">
               View Demo <i class="fas fa-arrow-right ml-2"></i>
             </a>
           </div>
