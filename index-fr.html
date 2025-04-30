@@ -324,13 +324,8 @@
           <a href="#skills" class="hover:text-primary transition-colors hover-glow lang" data-en="Skills" data-fr="Compétences">Skills</a>
           <a href="#projects" class="hover:text-primary transition-colors hover-glow lang" data-en="Projects" data-fr="Projets">Projects</a>
           <a href="#contact" class="hover:text-primary transition-colors hover-glow lang" data-en="Contact" data-fr="Contact">Contact</a>
-          <button onclick="window.location.href='index-fr.html'" class="lang-btn" aria-label="Français">
-            <img src="https://flagcdn.com/24x18/fr.png" alt="Français" />
-          </button>
-          
-          <button onclick="window.location.href='index.html'" class="lang-btn" aria-label="English">
-            <img src="https://flagcdn.com/24x18/gb.png" alt="English" />
-          </button>
+          <button class="lang-btn" data-lang="fr" aria-label="Français"><img src="https://flagcdn.com/24x18/fr.png" /></button>
+          <button class="lang-btn" data-lang="en" aria-label="English"><img src="https://flagcdn.com/24x18/gb.png" /></button>
         </div>
         <!-- MOBILE MENU BUTTON -->
         <button class="md:hidden text-xl hover:text-primary transition-colors" id="mobileMenuBtn" aria-label="Toggle Menu">
@@ -566,12 +561,12 @@
   <section id="projects" class="py-20 relative">
     <div class="absolute -top-20 left-0 w-full h-20" id="projects-trigger"></div>
     <div class="container mx-auto px-6">
-      <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center tech-font">
-        Featured <span class="gradient-text">Projects</span>
-      </h2>
+        <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center tech-font">
+            <span class="gradient-text">Projets</span> à la une
+        </h2>
+          
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Project 1: RAG for Engine Incidents -->
         <div class="card-glass rounded-xl overflow-hidden hover-glow">
           <div class="h-48 animated-gradient flex items-center justify-center relative">
             <i class="fas fa-plane-departure text-6xl text-dark opacity-80 glow" aria-hidden="true"></i>
@@ -580,16 +575,16 @@
             <div class="particle" style="top: 20%; left: 20%; width: 60px; height: 60px; animation-delay: 2s;"></div>
           </div>
           <div class="p-6">
-            <h3 class="text-xl font-bold mb-2 tech-font">RAG-based Engine Diagnostics</h3>
+            <h3 class="text-xl font-bold mb-2 tech-font">Diagnostic moteur basé sur RAG</h3>
             <p class="text-sm opacity-90 mb-4">
-              A Retrieval-Augmented Generation system for analyzing CFM56 & LEAP engine incidents. Integrates FAISS + BM25 to retrieve past case data for faster troubleshooting.
+              Un système de génération augmentée par récupération (RAG) pour analyser les incidents des moteurs CFM56 et LEAP. Intègre FAISS + BM25 pour retrouver des cas passés et accélérer le diagnostic.
             </p>
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Hybrid Retrieval</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Recherche hybride</span>
               <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">LangChain</span>
               <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Python</span>
             </div>
-          </div>
+          </div>          
         </div>
         
         <!-- Project 2: Fatigue Detection -->
@@ -598,21 +593,22 @@
             <i class="fas fa-heartbeat text-6xl text-dark opacity-80 glow" aria-hidden="true"></i>
             <div class="particle" style="top: 40%; left: 30%; width: 120px; height: 120px; animation-delay: 0.5s;"></div>
             <div class="particle" style="top: 70%; left: 60%; width: 90px; height: 90px; animation-delay: 1.5s;"></div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2 tech-font">Fatigue Detection AI</h3>
+            </div>
+            <div class="p-6">
+            <h3 class="text-xl font-bold mb-2 tech-font">IA de Détection de Fatigue</h3>
             <p class="text-sm opacity-90 mb-4">
-              R&D project for Thales to detect crew fatigue via face and motion analysis. Implemented model hyperparameter tuning and Docker-based workflows.
+                Projet de R&D pour Thales visant à détecter la fatigue de l’équipage via l’analyse du visage et des mouvements. Optimisation des hyperparamètres du modèle et workflows basés sur Docker mis en œuvre.
             </p>
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Computer Vision</span>
-              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Statistics</span>
-              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Docker</span>
+                <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Vision par ordinateur</span>
+                <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Statistiques</span>
+                <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Docker</span>
             </div>
             <a href="https://www.researchgate.net/publication/353220731_An_objective_Human_fatigue_monitoring_solution_for_Fatigue_Risk_Management_or_Reduced_Crew_Operations" class="text-primary text-sm font-bold flex items-center hover-glow">
-              View Case Study <i class="fas fa-arrow-right ml-2"></i>
+                Voir l’étude de cas <i class="fas fa-arrow-right ml-2"></i>
             </a>
-          </div>
+            </div>
+        
         </div>
 
           <!-- Project 4: Automated Short Video Generation -->
@@ -623,24 +619,24 @@
             <div class="particle" style="top: 70%; left: 60%; width: 80px; height: 80px; animation-delay: 1.3s;"></div>
           </div>
           <div class="p-6">
-            <h3 class="text-xl font-bold mb-2 tech-font">Automated TikTok/Shorts Generator</h3>
+            <h3 class="text-xl font-bold mb-2 tech-font">Générateur automatisé de TikTok/Shorts</h3>
             <p class="text-sm opacity-90 mb-4">
-              GenAI-powered app that automates creation of TikTok & YouTube Shorts from structured prompts (CSV). The pipeline generates voice-over, script, and fetches relevant footage online to assemble full videos autonomously.
+              Application propulsée par GenAI qui automatise la création de TikTok et de Shorts YouTube à partir de prompts structurés (CSV). Le pipeline génère la voix off, le script, et récupère automatiquement des vidéos pertinentes en ligne pour assembler des vidéos complètes.
             </p>
             <div class="flex flex-wrap gap-2 mb-4">
               <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">GenAI</span>
-              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Text-to-Speech</span>
-              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Video Automation</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Synthèse vocale</span>
+              <span class="text-xs px-3 py-1 bg-dark bg-opacity-50 rounded-full">Automatisation vidéo</span>
             </div>
             <div class="flex flex-col gap-2">
               <a href="https://huggingface.co/spaces/malvin-ai/light-ai-video-generator" target="_blank" class="text-primary text-sm font-bold flex items-center gap-2 hover-glow">
-                <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face Logo" class="h-5">
-                Try the demo App on Hugging Face <i class="fas fa-arrow-right ml-2"></i>
+                <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Logo Hugging Face" class="h-5">
+                Essayez la démo sur Hugging Face <i class="fas fa-arrow-right ml-2"></i>
               </a>              
               <a href="https://github.com/AIMalvin/creatorforge-ai" target="_blank" class="text-secondary text-sm font-bold flex items-center hover-glow">
-                View Completed App on GitHub <i class="fab fa-github ml-2"></i>
+                Voir l'application complète sur GitHub <i class="fab fa-github ml-2"></i>
               </a>
-            </div>
+            </div>          
           </div>
         </div>
 
@@ -667,12 +663,13 @@
       <div class="flex flex-col lg:flex-row gap-12">
         <!-- Contact Info ONLY (No Form) -->
         <div class="lg:w-1/2 mx-auto">
-          <div class="card-glass p-8 rounded-2xl h-full hover-glow">
-            <h3 class="text-2xl font-bold mb-6 tech-font">Let's Collaborate</h3>
-            <p class="mb-8 opacity-90">
-              Interested in working together or have questions about my work? 
-              Feel free to reach out. I'm always open to discussing new projects or ideas.
-            </p>
+            <div class="card-glass p-8 rounded-2xl h-full hover-glow">
+              <h3 class="text-2xl font-bold mb-6 tech-font">Collaborons ensemble</h3>
+              <p class="mb-8 opacity-90">
+                Vous êtes intéressé par une collaboration ou avez des questions sur mon travail ? 
+                N'hésitez pas à me contacter. Je suis toujours ouvert à discuter de nouveaux projets ou idées.
+              </p>
+          
             
             <div class="flex items-start space-x-4 mb-6">
               <div class="w-10 h-10 gradient-bg rounded-full flex-shrink-0 flex items-center justify-center glow">
