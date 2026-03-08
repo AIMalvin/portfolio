@@ -202,14 +202,45 @@
       background: rgba(255, 255, 255, 0.04);
     }
 
-    /* Link hover */
+    /* Alternating section backgrounds */
+    .section-alt {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Link hover with underline */
     a.nav-link {
       color: var(--text-muted);
       transition: color 0.2s ease;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    a.nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    a.nav-link:hover::after {
+      width: 100%;
     }
 
     a.nav-link:hover {
       color: var(--light);
+    }
+
+    /* Active nav link */
+    a.nav-link.active {
+      color: var(--light);
+    }
+
+    a.nav-link.active::after {
+      width: 100%;
     }
 
     /* Responsive Design */
@@ -292,7 +323,7 @@
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-24 relative">
+  <section id="about" class="py-24 relative section-alt">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
@@ -452,7 +483,7 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-24 relative">
+  <section id="projects" class="py-24 relative section-alt">
     <div class="container mx-auto px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
@@ -573,6 +604,7 @@
           <a href="#home" class="text-lg font-semibold text-white/80">
             Malvin Noel
           </a>
+          <p class="mt-1 text-sm text-white/40">Data Scientist & AI Engineer based in Paris</p>
           <p class="mt-1 text-xs text-white/30">
             &copy; 2025 Malvin Noel. All rights reserved.
           </p>
@@ -634,6 +666,27 @@
               behavior: 'smooth'
             });
           }
+        }
+      });
+    });
+
+    // Active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav a.nav-link[href^="#"]');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (window.pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
         }
       });
     });
